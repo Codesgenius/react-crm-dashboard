@@ -5,20 +5,30 @@ const users_from_db = [
         id: 1,
         name: "Ozor Michael Chisom",
         email: "michaelozor15@gmail.com",
-        password: "godisgood"
+        password: "godisgood",
+        avatar: "https://source.unsplash.com/random/200x200?sig=6"
     },
     {
         id: 2,
         name: "Monday",
         email: "monday@gmail.com",
-        password: "monday"
+        password: "monday",
+        avatar: "https://source.unsplash.com/random/200x200?sig=6"
     },
     {
         id: 1,
         name: "habib",
         email: "habib@gmail.com",
-        password: "habib"
+        password: "habib",
+        avatar: "https://source.unsplash.com/random/200x200?sig=6"
     },
+    {
+        id: 1,
+        name: "habib",
+        email: "emmy@gmail.com",
+        password: "emmy"
+    },
+
 ];
 
 export const loginUser = (email, password, callback) => {
@@ -41,7 +51,7 @@ export const loginUser = (email, password, callback) => {
 
 export const logoutUser = (callback) => {
     if(getLocalStorageData('user')){
-        setLocalStorageData('user', null);
+        localStorage.removeItem('user');
         callback(false);
         return {
             status: 200,

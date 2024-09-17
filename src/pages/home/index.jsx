@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
-const Home = () => {
+import React from 'react';
+import Layout from '../../components/layout';
+import Mainboard from './mainboard';
+
+const Home = ({auth}) => {
     return (
-        <div>
-            <h1>Home component</h1>
-        </div>
+        <Layout auth={auth}>
+            <Mainboard />
+        </Layout>
     )
 }
 

@@ -4,8 +4,9 @@ import fetchDataFromApi from '../../services/api/handlers/api-handler';
 // components
 import AdvancedTable from '../../components/advance-table';
 import Layout from '../../components/layout';
+import Loader from '../../components/Loader';
 
-const Clients = ({auth}) => {
+const Clients = ({auth, inline = false}) => {
     const headers = [
         'ID',
         'logo',
@@ -36,11 +37,9 @@ const Clients = ({auth}) => {
         () => {
             setLoading(true);
             fetchDataFromApi('clients')
-            
             .then(res => {
-                console.log(res.data.data);
                 const data = hydrateData(res.data.data);
-                setData(data);
+                setData(inline ? data.slice(0, 5): data);
                 setLoading(false);
             }).catch(err => {
                 setLoading(false);
@@ -48,14 +47,29 @@ const Clients = ({auth}) => {
                 setError(err);
             });
         },
-        []
+        [inline]
     );
 
     
 
     return (
-        <Layout auth={auth}>  
-            { loading && 'Loading...'}
+        inline ? <>
+        { loading && <Loader  height={"400px"} />}
+            { isError && error}
+            {
+                data.length > 0 
+                ?
+                    <AdvancedTable
+                        title={'Clients overview'}
+                        headers={headers} 
+                        data={data} 
+                    />
+                : 
+                !loading && `${data.length} records available`
+            }
+        </>
+        : <Layout auth={auth}>  
+            { loading && <Loader  height={"80vh"} />}
             { isError && error}
             {
                 data.length > 0 

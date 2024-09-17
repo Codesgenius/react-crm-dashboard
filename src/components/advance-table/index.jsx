@@ -13,12 +13,12 @@ const AdvancedTable = (props) => {
 
     return (
         <>
-            <div className="container pt-5">
+            <div className="container pt-2">
                 <div className="card">
                     {
                         title &&
                         <div className="card-header">
-                            <h4 className="card-title">{ title }</h4>
+                            <h5 className="card-title">{ title }</h5>
                         </div>
                     }
                     <div className="card-body">
